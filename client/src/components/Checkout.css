@@ -1,0 +1,106 @@
+.checkout__total {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.checkout__amount {
+  font-size: 1.5rem;
+}
+
+.add__form {
+  margin-top: 10px;
+}
+
+.add__button {
+  width: 100%;
+  background-color: var(--clr-red-dark);
+  color: white;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.add__button:hover {
+  background-color: var(--clr-red-light);
+}
+
+.close__modal {
+  position: absolute;
+  right: 1rem;
+  top: 2.5rem;
+  z-index: 1000;
+  cursor: pointer;
+  padding: 0.3rem;
+}
+
+.order-details {
+  font-size: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}
+
+.order-details li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-details li div {
+  padding: 10px;
+}
+
+.order-details .items {
+  text-align: right;
+  padding: 0;
+}
+
+.success-message {
+  color: green;
+}
+
+.App-payment {
+  padding: 30px;
+}
+
+.card__form {
+  margin: 30px auto 0;
+  max-width: 400px;
+  text-align: center;
+}
+
+.App-cards {
+  margin: 0 auto;
+  max-width: 1280px;
+  text-align: center;
+}
+
+.App-cards-list {
+  display: flex;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.App-cards-list > * {
+  transform: scale(0.8);
+  margin-bottom: 30px !important;
+}
+
+.App-highlight {
+  font-family: serif;
+  margin: 15px auto 0;
+  max-width: 300px;
+}
+
+.App-highlight > div {
+  padding-left: 40px;
+}

@@ -1,0 +1,18 @@
+footer {
+  background: var(--clr-primary);
+  padding: 1.25rem 2rem;
+  color: var(--clr-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+footer p {
+  margin-bottom: 0;
+}
+
+.footer__icon {
+  color: white;
+  margin-left: 10px;
+}

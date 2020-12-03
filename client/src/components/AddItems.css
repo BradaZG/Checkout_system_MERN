@@ -1,0 +1,25 @@
+.add__item {
+  display: flex;
+  min-height: 81vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.add__form {
+  width: 50%;
+}
+
+.add__label {
+  font-weight: 600;
+}
+
+.add__input {
+  width: 100%;
+  padding: 15px 20px;
+  margin: 20px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}

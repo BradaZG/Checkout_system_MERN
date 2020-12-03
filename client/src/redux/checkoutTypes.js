@@ -1,0 +1,11 @@
+export const FETCH_ITEMS = 'FETCH_ITEMS';
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const REMOVE_ITEM = 'REMOVE_ITEM';
+export const ADD_MORE_ITEMS = 'ADD_MORE_ITEMS';
+export const REMOVE_MORE_ITEMS = 'REMOVE_MORE_ITEMS';
+export const ADD_PROMOTION = 'ADD_PROMOTION';
+export const REMOVE_PROMOTION = 'REMOVE_PROMOTION';
+export const CLEAR_ORDER = 'CLEAR_ORDER';
+export const FETCH_ORDERS = 'FETCH_ORDERS';
+export const ADD_ORDER = 'ADD_ORDER';

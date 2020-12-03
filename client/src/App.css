@@ -1,0 +1,16 @@
+.items__container {
+  min-height: 81vh;
+  width: 90vw;
+  margin: 0 auto;
+  padding: 2.5rem 0;
+  max-width: var(--fixed-width);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.items__container h2 {
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
