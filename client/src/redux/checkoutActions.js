@@ -29,8 +29,8 @@ export const addToCart = (item) => (dispatch) => {
   });
 };
 
-export const removeFromCart = (id, price) => (dispatch) => {
-  dispatch({ type: REMOVE_FROM_CART, payload: { id, price } });
+export const removeFromCart = (item) => (dispatch) => {
+  dispatch({ type: REMOVE_FROM_CART, payload: item });
 };
 
 export const addNewItem = (itemName, itemPrice, itemPicture) => (dispatch) => {

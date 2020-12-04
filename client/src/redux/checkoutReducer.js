@@ -119,13 +119,11 @@ const checkoutReducer = (state = initialState, action) => {
         ...state,
         cartItems: state.cartItems - 1,
         orderItems: state.orderItems.filter(
-          (item) => item._id !== action.payload.id
+          (item) => item._id !== action.payload._id
         ),
         total:
           Number(Math.round(parseFloat(state.total + 'e' + 2)) + 'e-' + 2) -
-          Number(
-            Math.round(parseFloat(action.payload.price + 'e' + 2)) + 'e-' + 2
-          ),
+          action.payload.itemPrice,
       };
     case ADD_PROMOTION:
       let addDiscount = state.totalDiscounts;
@@ -165,7 +163,7 @@ const checkoutReducer = (state = initialState, action) => {
       if (action.payload) {
         addProm = [...state.promotions, action.payload];
       }
-      console.log(addDiscount);
+
       return {
         ...state,
         promotions: addProm,
@@ -218,7 +216,7 @@ const checkoutReducer = (state = initialState, action) => {
           (promotion) => promotion.id !== action.payload.id
         );
       }
-      console.log(removeDiscount);
+
       return {
         ...state,
         promotions: rmProm,

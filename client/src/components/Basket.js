@@ -16,9 +16,9 @@ const Basket = () => {
   const total = useSelector((state) => state.total);
   const dispatch = useDispatch();
 
-  const removeItem = (item, price) => {
+  const removeItem = (item) => {
     if (item.count === 1) {
-      dispatch(removeFromCart(item._id, price));
+      dispatch(removeFromCart(item));
     } else {
       dispatch(removeMoreItems(item));
     }
