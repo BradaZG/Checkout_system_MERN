@@ -133,7 +133,6 @@ const checkoutReducer = (state = initialState, action) => {
         return itemCount;
       });
 
-      console.log(itemCount);
       return {
         ...state,
         cartItems: state.cartItems - 1,

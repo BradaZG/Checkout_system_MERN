@@ -26,6 +26,8 @@ const Checkout = () => {
   const [address, setAddress] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const totalDiscounts = useSelector((state) => state.totalDiscounts);
+  const motionDiscount = useSelector((state) => state.motionDiscount);
+  const smokeDiscount = useSelector((state) => state.smokeDiscount);
   const orderItems = useSelector((state) => state.orderItems);
   const total = useSelector((state) => state.total);
   const dispatch = useDispatch();
@@ -43,7 +45,7 @@ const Checkout = () => {
             email,
             address,
             parseInt(cardNumber.replace(/\s/g, '')),
-            total - totalDiscounts,
+            total - totalDiscounts - motionDiscount - smokeDiscount,
             orderItems
           )
         );
