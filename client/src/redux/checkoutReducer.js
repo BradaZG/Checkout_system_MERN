@@ -17,7 +17,7 @@ const initialState = {
   loading: true,
   cartItems: 0,
   orderItems: [],
-  total: 0,
+  total: Number(0),
   promotions: [],
   orders: [],
   totalDiscounts: 0,
@@ -131,19 +131,31 @@ const checkoutReducer = (state = initialState, action) => {
       let addDiscount = state.totalDiscounts;
       let totalAmountAdd = state.total;
       if (action.payload.code === '20%OFF') {
-        addDiscount = totalAmountAdd * 0.2;
+        addDiscount = Number(
+          Math.round(parseFloat(totalAmountAdd * 0.2 + 'e' + 2)) + 'e-' + 2
+        );
       }
       if (action.payload.code === '5%OFF') {
         if (state.totalDiscounts === 20) {
-          addDiscount = 20 + totalAmountAdd * 0.05;
+          addDiscount =
+            20 +
+            Number(
+              Math.round(parseFloat(totalAmountAdd * 0.05 + 'e' + 2)) + 'e-' + 2
+            );
         }
         if (state.totalDiscounts === 0) {
-          addDiscount = totalAmountAdd * 0.05;
+          addDiscount = Number(
+            Math.round(parseFloat(totalAmountAdd * 0.05 + 'e' + 2)) + 'e-' + 2
+          );
         }
       }
       if (action.payload.code === '20EUROFF') {
         if (state.totalDiscounts === totalAmountAdd * 0.05) {
-          addDiscount = 20 + totalAmountAdd * 0.05;
+          addDiscount =
+            20 +
+            Number(
+              Math.round(parseFloat(totalAmountAdd * 0.05 + 'e' + 2)) + 'e-' + 2
+            );
         }
         if (state.totalDiscounts === 0) {
           addDiscount = 20;
@@ -153,11 +165,9 @@ const checkoutReducer = (state = initialState, action) => {
       if (action.payload) {
         addProm = [...state.promotions, action.payload];
       }
+      console.log(addDiscount);
       return {
         ...state,
-        total: Number(
-          Math.round(parseFloat(totalAmountAdd + 'e' + 2)) + 'e-' + 2
-        ),
         promotions: addProm,
         totalDiscounts: addDiscount,
       };
@@ -168,16 +178,35 @@ const checkoutReducer = (state = initialState, action) => {
         removeDiscount = 0;
       }
       if (action.payload.code === '5%OFF') {
-        if (state.totalDiscounts === 20 + totalAmountRem * 0.05) {
+        if (
+          state.totalDiscounts ===
+          20 +
+            Number(
+              Math.round(parseFloat(totalAmountRem * 0.05 + 'e' + 2)) + 'e-' + 2
+            )
+        ) {
           removeDiscount = 20;
         }
-        if (state.totalDiscounts === totalAmountRem * 0.05) {
+        if (
+          state.totalDiscounts ===
+          Number(
+            Math.round(parseFloat(totalAmountRem * 0.05 + 'e' + 2)) + 'e-' + 2
+          )
+        ) {
           removeDiscount = 0;
         }
       }
       if (action.payload.code === '20EUROFF') {
-        if (state.totalDiscounts === totalAmountRem * 0.05 + 20) {
-          removeDiscount = totalAmountRem * 0.05;
+        if (
+          state.totalDiscounts ===
+          Number(
+            Math.round(parseFloat(totalAmountRem * 0.05 + 'e' + 2)) + 'e-' + 2
+          ) +
+            20
+        ) {
+          removeDiscount = Number(
+            Math.round(parseFloat(totalAmountRem * 0.05 + 'e' + 2)) + 'e-' + 2
+          );
         }
         if (state.totalDiscounts === 20) {
           removeDiscount = 0;
@@ -189,11 +218,9 @@ const checkoutReducer = (state = initialState, action) => {
           (promotion) => promotion.id !== action.payload.id
         );
       }
+      console.log(removeDiscount);
       return {
         ...state,
-        total: Number(
-          Math.round(parseFloat(totalAmountRem + 'e' + 2)) + 'e-' + 2
-        ),
         promotions: rmProm,
         totalDiscounts: removeDiscount,
       };

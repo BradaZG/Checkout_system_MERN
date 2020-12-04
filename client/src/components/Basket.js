@@ -60,11 +60,7 @@ const Basket = () => {
         <hr />
         <br />
         <h3 style={{ textAlign: 'right' }}>
-          TOTAL:{' '}
-          {total
-            ? Number(Math.round(parseFloat(total + 'e' + 2)) + 'e-' + 2)
-            : Number(0)}{' '}
-          €
+          TOTAL: {Number(Math.round(parseFloat(total + 'e' + 2)) + 'e-' + 2)} €
         </h3>
         {total ? (
           <Link to='/orders' style={{ textAlign: 'center' }}>
