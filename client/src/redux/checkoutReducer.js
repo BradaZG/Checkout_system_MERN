@@ -115,6 +115,25 @@ const checkoutReducer = (state = initialState, action) => {
         smokeDiscount: state.smokeDiscount - totalSmokeRm,
       };
     case REMOVE_FROM_CART:
+      if (state.orderItems.length === 1) {
+        state.promotions = [];
+        state.totalDiscounts = 0;
+      }
+      let itemCount = 0;
+      state.orderItems.map((item) => {
+        if (item.itemName === action.payload.itemName) {
+          itemCount = item.count;
+        }
+        if (action.payload.itemName === 'Motion Sensor') {
+          state.motionDiscount = 0;
+        }
+        if (action.payload.itemName === 'Smoke Sensor') {
+          state.smokeDiscount = 0;
+        }
+        return itemCount;
+      });
+
+      console.log(itemCount);
       return {
         ...state,
         cartItems: state.cartItems - 1,
@@ -123,7 +142,7 @@ const checkoutReducer = (state = initialState, action) => {
         ),
         total:
           Number(Math.round(parseFloat(state.total + 'e' + 2)) + 'e-' + 2) -
-          action.payload.itemPrice,
+          action.payload.itemPrice * itemCount,
       };
     case ADD_PROMOTION:
       let addDiscount = state.totalDiscounts;
