@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearOrder, addOrder } from '../redux/checkoutActions';
+import { clearOrder, addOrder, addPromotion } from '../redux/checkoutActions';
 import { Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
 import './Checkout.css';
@@ -30,6 +30,10 @@ const Checkout = () => {
   const total = useSelector((state) => state.total);
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders);
+
+  useEffect(() => {
+    dispatch(addPromotion());
+  }, [dispatch]);
 
   const addNewOrder = () => {
     if (total) {

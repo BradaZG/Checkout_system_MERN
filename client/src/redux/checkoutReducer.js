@@ -128,32 +128,31 @@ const checkoutReducer = (state = initialState, action) => {
     case ADD_PROMOTION:
       let addDiscount = state.totalDiscounts;
       let totalAmountAdd = state.total;
+      if (state.promotions.some((el) => el.code === '20%OFF')) {
+        addDiscount = totalAmountAdd * 0.2;
+      }
+      if (
+        state.promotions.some((el) => el.code === '5%OFF') &&
+        state.promotions.some((el) => el.code === '20EUROFF')
+      ) {
+        addDiscount = totalAmountAdd * 0.05 + 20;
+      } else if (state.promotions.some((el) => el.code === '5%OFF')) {
+        addDiscount = totalAmountAdd * 0.05;
+      }
       if (action.payload.code === '20%OFF') {
-        addDiscount = Number(
-          Math.round(parseFloat(totalAmountAdd * 0.2 + 'e' + 2)) + 'e-' + 2
-        );
+        addDiscount = totalAmountAdd * 0.2;
       }
       if (action.payload.code === '5%OFF') {
         if (state.totalDiscounts === 20) {
-          addDiscount =
-            20 +
-            Number(
-              Math.round(parseFloat(totalAmountAdd * 0.05 + 'e' + 2)) + 'e-' + 2
-            );
+          addDiscount = 20 + totalAmountAdd;
         }
         if (state.totalDiscounts === 0) {
-          addDiscount = Number(
-            Math.round(parseFloat(totalAmountAdd * 0.05 + 'e' + 2)) + 'e-' + 2
-          );
+          addDiscount = totalAmountAdd * 0.05;
         }
       }
       if (action.payload.code === '20EUROFF') {
         if (state.totalDiscounts === totalAmountAdd * 0.05) {
-          addDiscount =
-            20 +
-            Number(
-              Math.round(parseFloat(totalAmountAdd * 0.05 + 'e' + 2)) + 'e-' + 2
-            );
+          addDiscount = 20 + totalAmountAdd * 0.05;
         }
         if (state.totalDiscounts === 0) {
           addDiscount = 20;
@@ -176,35 +175,16 @@ const checkoutReducer = (state = initialState, action) => {
         removeDiscount = 0;
       }
       if (action.payload.code === '5%OFF') {
-        if (
-          state.totalDiscounts ===
-          20 +
-            Number(
-              Math.round(parseFloat(totalAmountRem * 0.05 + 'e' + 2)) + 'e-' + 2
-            )
-        ) {
+        if (state.totalDiscounts === 20 + totalAmountRem * 0.05) {
           removeDiscount = 20;
         }
-        if (
-          state.totalDiscounts ===
-          Number(
-            Math.round(parseFloat(totalAmountRem * 0.05 + 'e' + 2)) + 'e-' + 2
-          )
-        ) {
+        if (state.totalDiscounts === totalAmountRem * 0.05) {
           removeDiscount = 0;
         }
       }
       if (action.payload.code === '20EUROFF') {
-        if (
-          state.totalDiscounts ===
-          Number(
-            Math.round(parseFloat(totalAmountRem * 0.05 + 'e' + 2)) + 'e-' + 2
-          ) +
-            20
-        ) {
-          removeDiscount = Number(
-            Math.round(parseFloat(totalAmountRem * 0.05 + 'e' + 2)) + 'e-' + 2
-          );
+        if (state.totalDiscounts === totalAmountRem * 0.05 + 20) {
+          removeDiscount = totalAmountRem * 0.05;
         }
         if (state.totalDiscounts === 20) {
           removeDiscount = 0;
