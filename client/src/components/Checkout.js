@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearOrder, addOrder, addPromotion } from '../redux/checkoutActions';
 import { Redirect } from 'react-router-dom';
-import Modal from 'react-modal';
+
 import './Checkout.css';
 
 import {
@@ -11,6 +11,7 @@ import {
   formatExpirationDate,
 } from '../utils';
 import PromoCodes from './PromoCodes';
+import OpenModal from './OpenModal';
 
 const Checkout = () => {
   const [email, setEmail] = useState('');
@@ -31,7 +32,6 @@ const Checkout = () => {
   const orderItems = useSelector((state) => state.orderItems);
   const total = useSelector((state) => state.total);
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders);
 
   useEffect(() => {
     dispatch(addPromotion());
@@ -171,72 +171,7 @@ const Checkout = () => {
       </form>
       <PromoCodes />
       {!order && (
-        <Modal
-          ariaHideApp={false}
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-        >
-          <button className='close__modal' onClick={closeModal}>
-            x
-          </button>
-          <div className='order-details'>
-            <h3 className='success-message'>Your order has been placed.</h3>
-            <br />
-            {orders.map((order) => (
-              <div key={order._id}>
-                <h2>Order nr. {order._id}</h2>
-                <br />
-                <ul>
-                  <li>
-                    <div>
-                      <strong>Email:</strong>
-                    </div>
-                    <div>{order.email}</div>
-                  </li>
-                  <li>
-                    <div>
-                      <strong>Address:</strong>
-                    </div>
-                    <div>{order.address}</div>
-                  </li>
-                  <li>
-                    <div>
-                      <strong>Date:</strong>
-                    </div>
-                    <div>
-                      {new Date(order.createdAt).toLocaleString('de-DE', {
-                        hour12: false,
-                      })}
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <strong>Total:</strong>
-                    </div>
-                    <div>
-                      €{' '}
-                      {Number(
-                        Math.round(parseFloat(order.total + 'e' + 2)) + 'e-' + 2
-                      )}
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <strong>Cart Items:</strong>
-                    </div>
-                    <div>
-                      {order.orderItems.map((item) => (
-                        <div key={item._id}>
-                          {item.count} {' x '} {item.itemName}
-                        </div>
-                      ))}
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            ))}
-          </div>
-        </Modal>
+        <OpenModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
       )}
     </div>
   );

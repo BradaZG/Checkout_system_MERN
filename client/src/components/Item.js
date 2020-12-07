@@ -28,12 +28,12 @@ const Item = ({ item }) => {
       <div>
         <h4>{item.itemName}</h4>
         <h4 className='items__price'>€ {item.itemPrice}</h4>
-        <button
+        {/* <button
           className='remove__btn'
           onClick={() => dispatch(removeItem(item._id))}
         >
           Remove Item
-        </button>
+        </button> */}
       </div>
       <div>
         {inCart ? (
