@@ -1,4 +1,4 @@
-MERN checkout system app
+MERN checkout system app. Working version on https://checkout-system.netlify.app/.
 
 Checkout system app made with React, Node.js, MongoDB and Redux. Items can be added and removed from database.
 
