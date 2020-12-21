@@ -16,7 +16,6 @@ Router.route('/').get((req, res) => {
 
 Router.route('/add').post((req, res) => {
   const { itemName, itemPrice, itemPicture } = req.body;
-  console.log(itemName, itemPrice, itemPicture);
 
   const newItem = new shoppingItem({
     itemName,
@@ -28,7 +27,6 @@ Router.route('/add').post((req, res) => {
     .save()
     .then((response) => {
       res.status(200).send(response);
-      console.log(response);
     })
     .catch((error) => {
       res.status(400).send(error);

@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const itemsRoutes = require('./routes/item.routes');
 const orderRoutes = require('./routes/order.routes');
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
