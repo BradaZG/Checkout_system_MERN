@@ -13,54 +13,67 @@ import {
   REMOVE_PROMOTION,
 } from './checkoutTypes';
 
-export const fetchItems = () => (dispatch) => {
+export const fetchItems = () => (dispatch, getState) => {
   myAxios
     .get('/')
     .then((response) =>
       dispatch({ type: FETCH_ITEMS, payload: response.data })
     );
+  localStorage.setItem('cart', JSON.stringify(getState()));
 };
 
-export const addToCart = (item) => (dispatch) => {
+export const addToCart = (item) => (dispatch, getState) => {
   item.count = 1;
   dispatch({
     type: ADD_TO_CART,
     payload: item,
   });
+  localStorage.setItem('cart', JSON.stringify(getState()));
 };
 
-export const removeFromCart = (item) => (dispatch) => {
+export const removeFromCart = (item) => (dispatch, getState) => {
   dispatch({ type: REMOVE_FROM_CART, payload: item });
+  localStorage.setItem('cart', JSON.stringify(getState()));
 };
 
-export const addNewItem = (itemName, itemPrice, itemPicture) => (dispatch) => {
+export const addNewItem = (itemName, itemPrice, itemPicture) => (
+  dispatch,
+  getState
+) => {
   myAxios.post('/add', { itemName, itemPrice, itemPicture });
+  localStorage.setItem('cart', JSON.stringify(getState()));
 };
 
-export const removeItem = (id) => (dispatch) => {
+export const removeItem = (id) => (dispatch, getState) => {
   myAxios
     .delete('/delete/' + id)
     .then((response) => dispatch({ type: REMOVE_ITEM, payload: id }));
+  localStorage.setItem('cart', JSON.stringify(getState()));
 };
 
-export const addMoreItems = (item) => (dispatch) => {
+export const addMoreItems = (item) => (dispatch, getState) => {
   dispatch({ type: ADD_MORE_ITEMS, payload: item });
+  localStorage.setItem('cart', JSON.stringify(getState()));
 };
 
-export const removeMoreItems = (item) => (dispatch) => {
+export const removeMoreItems = (item) => (dispatch, getState) => {
   dispatch({ type: REMOVE_MORE_ITEMS, payload: item });
+  localStorage.setItem('cart', JSON.stringify(getState()));
 };
 
-export const addPromotion = (code = '') => (dispatch) => {
+export const addPromotion = (code = '') => (dispatch, getState) => {
   dispatch({ type: ADD_PROMOTION, payload: code });
+  localStorage.setItem('cart', JSON.stringify(getState()));
 };
 
-export const removePromotion = (id = '', code = '') => (dispatch) => {
+export const removePromotion = (id = '', code = '') => (dispatch, getState) => {
   dispatch({ type: REMOVE_PROMOTION, payload: { id, code } });
+  localStorage.setItem('cart', JSON.stringify(getState()));
 };
 
-export const clearOrder = () => (dispatch) => {
+export const clearOrder = () => (dispatch, getState) => {
   dispatch({ type: CLEAR_ORDER });
+  localStorage.setItem('cart', JSON.stringify(getState()));
 };
 
 export const addOrder = (email, address, cardNumber, total, orderItems) => (

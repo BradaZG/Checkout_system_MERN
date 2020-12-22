@@ -12,18 +12,20 @@ import {
   REMOVE_PROMOTION,
 } from './checkoutTypes';
 
-const initialState = {
-  items: [],
-  loading: true,
-  cartItems: 0,
-  orderItems: [],
-  total: Number(0),
-  promotions: [],
-  orders: [],
-  totalDiscounts: 0,
-  motionDiscount: 0,
-  smokeDiscount: 0,
-};
+const initialState = localStorage.getItem('cart')
+  ? JSON.parse(localStorage.getItem('cart'))
+  : {
+      items: [],
+      loading: true,
+      cartItems: 0,
+      orderItems: [],
+      total: Number(0),
+      promotions: [],
+      orders: [],
+      totalDiscounts: 0,
+      motionDiscount: 0,
+      smokeDiscount: 0,
+    };
 
 const checkoutReducer = (state = initialState, action) => {
   switch (action.type) {
